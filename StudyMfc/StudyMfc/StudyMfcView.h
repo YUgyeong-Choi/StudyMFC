@@ -49,6 +49,7 @@ private:
 
 public:
 	virtual void OnInitialUpdate();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // StudyMfcView.cpp의 디버그 버전

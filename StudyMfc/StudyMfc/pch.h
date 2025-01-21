@@ -13,6 +13,13 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
+#include <vector>
+#include <list>
+#include <map>
+#include <string>
+#include <algorithm>
+#include <afxstr.h>
+
 using namespace std;
 
 #endif //PCH_H

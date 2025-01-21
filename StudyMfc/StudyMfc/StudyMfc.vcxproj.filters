@@ -37,6 +37,12 @@
     <Filter Include="04.Etc\00.Texture\01.SingleTexture">
       <UniqueIdentifier>{be2556e2-38bc-41d4-8d5b-be83bc748b5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Etc\00.Texture\02.MultiTexture">
+      <UniqueIdentifier>{d223887a-be05-4980-9d32-0eb85c210eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Manager\01.TextureMgr">
+      <UniqueIdentifier>{452c7d03-c714-4d5a-a9af-ef9c1bb8f637}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StudyMfc.h">
@@ -72,6 +78,12 @@
     <ClInclude Include="CSingleTexture.h">
       <Filter>04.Etc\00.Texture\01.SingleTexture</Filter>
     </ClInclude>
+    <ClInclude Include="CMultiTexture.h">
+      <Filter>04.Etc\00.Texture\02.MultiTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="CTextureMgr.h">
+      <Filter>03.Manager\01.TextureMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyMfc.cpp">
@@ -97,6 +109,12 @@
     </ClCompile>
     <ClCompile Include="CSingleTexture.cpp">
       <Filter>04.Etc\00.Texture\01.SingleTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="CMultiTexture.cpp">
+      <Filter>04.Etc\00.Texture\02.MultiTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="CTextureMgr.cpp">
+      <Filter>03.Manager\01.TextureMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

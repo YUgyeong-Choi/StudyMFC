@@ -197,8 +197,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CDevice.h" />
+    <ClInclude Include="CMultiTexture.h" />
     <ClInclude Include="CSingleTexture.h" />
     <ClInclude Include="CTexture.h" />
+    <ClInclude Include="CTextureMgr.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="pch.h" />
@@ -210,8 +212,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CDevice.cpp" />
+    <ClCompile Include="CMultiTexture.cpp" />
     <ClCompile Include="CSingleTexture.cpp" />
     <ClCompile Include="CTexture.cpp" />
+    <ClCompile Include="CTextureMgr.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

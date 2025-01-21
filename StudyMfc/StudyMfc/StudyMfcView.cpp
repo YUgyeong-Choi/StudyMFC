@@ -12,6 +12,9 @@
 
 #include "StudyMfcDoc.h"
 #include "StudyMfcView.h"
+#include "CDevice.h"
+#include "CTextureMgr.h"
+#include "MainFrm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -28,6 +31,8 @@ BEGIN_MESSAGE_MAP(CStudyMfcView, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_DESTROY()
+	ON_WM_LBUTTONDOWN() //좌클릭 활성화
 END_MESSAGE_MAP()
 
 // CStudyMfcView 생성/소멸
@@ -46,6 +51,24 @@ void CStudyMfcView::OnInitialUpdate()
 {
 	CView::OnInitialUpdate();
 
+	CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
+
+	RECT rcWnd{};
+	pMainFrm->GetWindowRect(&rcWnd); //전체 윈도우 크기 (창, 테두리, 메뉴, 타이틀 바 모두 포함)
+	SetRect(&rcWnd, 0, 0, rcWnd.right - rcWnd.left, rcWnd.bottom - rcWnd.top);
+
+	RECT rcMainView{};
+	GetClientRect(&rcMainView);
+	float	fRowFrm = float(rcWnd.right - rcMainView.right);
+	float	fColFrm = float(rcWnd.bottom - rcMainView.bottom);
+
+	pMainFrm->SetWindowPos(nullptr,	
+		0,
+		0,
+		int(WINCX + fRowFrm),
+		int(WINCY + fColFrm),
+		SWP_NOZORDER); 
+
 	g_hWnd = m_hWnd;
 
 	if (FAILED(CDevice::Get_Instance()->Init_Device()))
@@ -53,6 +76,23 @@ void CStudyMfcView::OnInitialUpdate()
 		AfxMessageBox(L"Init_Device Create Failed");
 		return;
 	}
+
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
+		L"../Texture/Stage/Terrain/Tile/Tile%d.png",
+		TEX_MULTI, L"Terrain", L"Tile", 36)))
+	{
+		AfxMessageBox(L"Terrain Texture Insert Failed");
+		return;
+	}
+}
+
+void CStudyMfcView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	CView::OnLButtonDown(nFlags, point);
+
+	CString str;
+	str.Format(_T("클릭한 위치: (%d, %d)"), point.x, point.y);
+	AfxMessageBox(str);
 }
 
 // CStudyMfcView 그리기
@@ -64,13 +104,44 @@ void CStudyMfcView::OnDraw(CDC* /*pDC*/)
 	if (!pDoc)
 		return;
 
+	D3DXMATRIX	matWorld, matScale, matRotZ, matTrans;
+
+	D3DXMatrixIdentity(&matWorld);
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(45.f));
+	D3DXMatrixTranslation(&matTrans, 0, 0, 0.f);
+
+	matWorld = matScale * matTrans;
+
 	m_pDevice->Render_Begin();
+
+	m_pDevice->Get_Sprite()->SetTransform(&matWorld);
+	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", 7);
+	float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
+	float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
+	D3DXVECTOR3	vTemp{ fCenterX, fCenterY, 0.f };
+	m_pDevice->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &vTemp, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	TCHAR	szBuf[MIN_STR] = L"";
+
+	int	iNumber = 1000;
+
+	swprintf_s(szBuf, L"%d", iNumber);
+
+	m_pDevice->Get_Font()->DrawTextW(m_pDevice->Get_Sprite(),
+		szBuf,		// 출력할 문자열
+		lstrlen(szBuf),  // 문자열 버퍼의 크기
+		nullptr,	// 출력할 렉트 위치
+		0,			// 정렬 기준(옵션)
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
 	m_pDevice->Render_End();
 }
 
 void CStudyMfcView::OnDestroy()
 {
 	CView::OnDestroy();
+	CTextureMgr::Destroy_Instance();
 	m_pDevice->Destroy_Instance();
 }
 
