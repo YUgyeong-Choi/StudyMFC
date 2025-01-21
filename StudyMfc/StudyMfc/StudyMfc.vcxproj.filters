@@ -66,6 +66,12 @@
     <ClInclude Include="CDevice.h">
       <Filter>03.Manager\00.Device</Filter>
     </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>04.Etc\00.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="CSingleTexture.h">
+      <Filter>04.Etc\00.Texture\01.SingleTexture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyMfc.cpp">
@@ -85,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="CDevice.cpp">
       <Filter>03.Manager\00.Device</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>04.Etc\00.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="CSingleTexture.cpp">
+      <Filter>04.Etc\00.Texture\01.SingleTexture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
