@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StudyMfc", "StudyMfc\StudyMfc.vcxproj", "{35AD5155-5759-4AE6-9892-E1B9940C5C5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Header", "Header", "{8B011B42-A90A-499B-9738-15D47F533D0C}"
+	ProjectSection(SolutionItems) = preProject
+		Header\Define.h = Header\Define.h
+		Header\Enum.h = Header\Enum.h
+		Header\Functor.h = Header\Functor.h
+		Header\Include.h = Header\Include.h
+		Header\Struct.h = Header\Struct.h
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35AD5155-5759-4AE6-9892-E1B9940C5C5B}.Debug|x64.ActiveCfg = Debug|x64
+		{35AD5155-5759-4AE6-9892-E1B9940C5C5B}.Debug|x64.Build.0 = Debug|x64
+		{35AD5155-5759-4AE6-9892-E1B9940C5C5B}.Debug|x86.ActiveCfg = Debug|Win32
+		{35AD5155-5759-4AE6-9892-E1B9940C5C5B}.Debug|x86.Build.0 = Debug|Win32
+		{35AD5155-5759-4AE6-9892-E1B9940C5C5B}.Release|x64.ActiveCfg = Release|x64
+		{35AD5155-5759-4AE6-9892-E1B9940C5C5B}.Release|x64.Build.0 = Release|x64
+		{35AD5155-5759-4AE6-9892-E1B9940C5C5B}.Release|x86.ActiveCfg = Release|Win32
+		{35AD5155-5759-4AE6-9892-E1B9940C5C5B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C973DE4-9D60-49CC-9965-ADF3967D552B}
+	EndGlobalSection
+EndGlobal

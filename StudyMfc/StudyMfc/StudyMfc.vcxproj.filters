@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="00.MainFrm">
+      <UniqueIdentifier>{f31c4543-9921-46f5-b799-989249077e86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.ToolView">
+      <UniqueIdentifier>{e9b066a2-576c-45a5-9aab-fab870af6d65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.ToolDoc">
+      <UniqueIdentifier>{395a2231-e881-43cd-88be-bf067d6d7d31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Manager">
+      <UniqueIdentifier>{e5c8e93f-07ff-4cc3-b90a-ac6d080092af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Manager\00.Device">
+      <UniqueIdentifier>{a5503168-8afa-4d35-875f-893b922cc73a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Etc">
+      <UniqueIdentifier>{89dcd1b5-452b-4521-b7e1-198d1280b0a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Etc\00.Texture">
+      <UniqueIdentifier>{2f73f3c0-5717-461c-a43c-defa3141fd11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Etc\00.Texture\01.SingleTexture">
+      <UniqueIdentifier>{be2556e2-38bc-41d4-8d5b-be83bc748b5a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="StudyMfc.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>00.MainFrm</Filter>
+    </ClInclude>
+    <ClInclude Include="StudyMfcView.h">
+      <Filter>01.ToolView</Filter>
+    </ClInclude>
+    <ClInclude Include="StudyMfcDoc.h">
+      <Filter>02.ToolDoc</Filter>
+    </ClInclude>
+    <ClInclude Include="CDevice.h">
+      <Filter>03.Manager\00.Device</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="StudyMfc.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>00.MainFrm</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyMfcView.cpp">
+      <Filter>01.ToolView</Filter>
+    </ClCompile>
+    <ClCompile Include="StudyMfcDoc.cpp">
+      <Filter>02.ToolDoc</Filter>
+    </ClCompile>
+    <ClCompile Include="CDevice.cpp">
+      <Filter>03.Manager\00.Device</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StudyMfc.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\StudyMfc.rc2">
+      <Filter>리소스 파일</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\StudyMfcDoc.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\StudyMfc.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
