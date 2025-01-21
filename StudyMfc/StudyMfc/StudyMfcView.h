@@ -4,6 +4,7 @@
 
 #pragma once
 #include "CDevice.h"
+#include "CTerrain.h"
 
 class CStudyMfcView : public CView
 {
@@ -46,7 +47,7 @@ public:
 
 private:
 	CDevice* m_pDevice;
-
+	CTerrain* m_pTerrain;
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);

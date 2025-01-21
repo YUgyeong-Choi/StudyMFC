@@ -43,6 +43,9 @@
     <Filter Include="03.Manager\01.TextureMgr">
       <UniqueIdentifier>{452c7d03-c714-4d5a-a9af-ef9c1bb8f637}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Etc\01.Terrain">
+      <UniqueIdentifier>{ecf84322-3ff4-4c72-b4ad-a3674d68d861}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StudyMfc.h">
@@ -84,6 +87,9 @@
     <ClInclude Include="CTextureMgr.h">
       <Filter>03.Manager\01.TextureMgr</Filter>
     </ClInclude>
+    <ClInclude Include="CTerrain.h">
+      <Filter>04.Etc\01.Terrain</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyMfc.cpp">
@@ -115,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="CTextureMgr.cpp">
       <Filter>03.Manager\01.TextureMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CTerrain.cpp">
+      <Filter>04.Etc\01.Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -199,6 +199,7 @@
     <ClInclude Include="CDevice.h" />
     <ClInclude Include="CMultiTexture.h" />
     <ClInclude Include="CSingleTexture.h" />
+    <ClInclude Include="CTerrain.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTextureMgr.h" />
     <ClInclude Include="framework.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="CDevice.cpp" />
     <ClCompile Include="CMultiTexture.cpp" />
     <ClCompile Include="CSingleTexture.cpp" />
+    <ClCompile Include="CTerrain.cpp" />
     <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTextureMgr.cpp" />
     <ClCompile Include="MainFrm.cpp" />
