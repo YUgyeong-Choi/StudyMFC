@@ -47,13 +47,14 @@ void CTerrain::Render(CDevice* _device)
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(45.f));
 
-	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", 7);
-	float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
-	float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
-
-	D3DXVECTOR3	vTemp{ fCenterX, fCenterY, 0.f };
-
 	for (size_t i = 0; i < m_vecTile.size(); ++i) {
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", m_vecTile[i]->byDrawID);
+		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
+		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
+
+		D3DXVECTOR3	vTemp{ fCenterX, fCenterY, 0.f };
+
+
 		D3DXMatrixTranslation(&matTrans, m_vecTile[i]->vPos.x, m_vecTile[i]->vPos.y, 0.f);
 		matWorld = matScale * matTrans;
 		_device->Get_Sprite()->SetTransform(&matWorld);
@@ -78,4 +79,25 @@ void CTerrain::Release()
 	for (size_t i = 0; i < m_vecTile.size(); ++i) {
 		Safe_Delete<TILE*>(m_vecTile[i]);
 	}
+}
+
+void CTerrain::ChangeTile(int x, int y)
+{
+	bool checkX;
+	bool checkY;
+	for (size_t i = 0; i < m_vecTile.size(); ++i) {
+		checkX = false;
+		checkY = false;
+		if (m_vecTile[i]->vPos.x - (TILECX * 0.2) < x && x < m_vecTile[i]->vPos.x + (TILECX * 0.2)) {
+			checkX = true;
+		}
+		if (m_vecTile[i]->vPos.y - (TILECY * 0.2) < y && y < m_vecTile[i]->vPos.y + (TILECY * 0.2)) {
+			checkY = true;
+		}
+
+		if (checkX==true &&  checkY==true) {
+			m_vecTile[i]->byDrawID = 1;
+		}
+	}
+
 }

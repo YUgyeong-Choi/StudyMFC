@@ -92,10 +92,8 @@ void CStudyMfcView::OnInitialUpdate()
 void CStudyMfcView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CView::OnLButtonDown(nFlags, point);
-
-	CString str;
-	str.Format(_T("클릭한 위치: (%d, %d)"), point.x, point.y);
-	AfxMessageBox(str);
+	m_pTerrain->ChangeTile(point.x, point.y);
+	Invalidate();
 }
 
 // CStudyMfcView 그리기
@@ -112,6 +110,7 @@ void CStudyMfcView::OnDraw(CDC* /*pDC*/)
 
 
 	m_pDevice->Render_End();
+
 }
 
 void CStudyMfcView::OnDestroy()

@@ -18,7 +18,6 @@
 #include <map>
 #include <string>
 #include <algorithm>
-#include <afxstr.h>
 
 using namespace std;
 

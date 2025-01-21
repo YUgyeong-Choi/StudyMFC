@@ -14,7 +14,7 @@ public:
 	void		Update();
 	void		Render(CDevice* _device);
 	void		Release();
-
+	void		ChangeTile(int x, int y);
 private:
 	vector<TILE*>		m_vecTile;
 };
