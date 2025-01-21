@@ -58,18 +58,19 @@ void CTerrain::Render(CDevice* _device)
 		matWorld = matScale * matTrans;
 		_device->Get_Sprite()->SetTransform(&matWorld);
 		_device->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &vTemp, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
-	}
 
-	//TCHAR	szBuf[MIN_STR] = L"";
-	//int	iNumber = 1000;
-	//swprintf_s(szBuf, L"%d", iNumber);
-	//RECT rect = { -400, -300, 400, 300 };
-	//_device->Get_Font()->DrawTextW(_device->Get_Sprite(),
-	//	szBuf,		// 출력할 문자열
-	//	lstrlen(szBuf),  // 문자열 버퍼의 크기
-	//	&rect,	// 출력할 렉트 위치
-	//	DT_CENTER | DT_VCENTER,			// 정렬 기준(옵션)
-	//	D3DCOLOR_ARGB(255, 255, 255, 255));
+
+		TCHAR	szBuf[MIN_STR] = L"";
+		int	iNumber = 1000;
+		swprintf_s(szBuf, L"%d,%d", (int)m_vecTile[i]->vPos.x, (int)m_vecTile[i]->vPos.y);
+		RECT rect = { -400, -300, 400, 300 };
+		_device->Get_Font()->DrawTextW(_device->Get_Sprite(),
+			szBuf,		// 출력할 문자열
+			lstrlen(szBuf),  // 문자열 버퍼의 크기
+			&rect,	// 출력할 렉트 위치
+			DT_CENTER | DT_VCENTER,			// 정렬 기준(옵션)
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 }
 
 void CTerrain::Release()
