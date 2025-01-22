@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Include.h"
-#include "CDevice.h"
 
 class CTerrain
 {
@@ -12,9 +11,15 @@ public:
 public:
 	void		Initialize();
 	void		Update();
-	void		Render(CDevice* _device);
+	void		Render();
 	void		Release();
-	void		ChangeTile(int x, int y);
+public:
+	void	Tile_Change(const D3DXVECTOR3& vPos, const BYTE& byDrawID);
+
+private:
+	bool	Picking(const D3DXVECTOR3& vPos, const int& iIndex);
+	bool	Picking_Dot(const D3DXVECTOR3& vPos, const int& iIndex);
+	int		Get_TileIdx(const D3DXVECTOR3& vPos);
 private:
 	vector<TILE*>		m_vecTile;
 };

@@ -92,8 +92,8 @@ void CStudyMfcView::OnInitialUpdate()
 void CStudyMfcView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CView::OnLButtonDown(nFlags, point);
-	m_pTerrain->ChangeTile(point.x, point.y);
-	Invalidate();
+	m_pTerrain->Tile_Change(D3DXVECTOR3(float(point.x), float(point.y), 0.f), 0);
+	Invalidate(false);
 }
 
 // CStudyMfcView 그리기
@@ -106,9 +106,7 @@ void CStudyMfcView::OnDraw(CDC* /*pDC*/)
 		return;
 
 	m_pDevice->Render_Begin();
-	m_pTerrain->Render(m_pDevice);
-
-
+	m_pTerrain->Render();
 	m_pDevice->Render_End();
 
 }
