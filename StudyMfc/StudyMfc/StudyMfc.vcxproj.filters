@@ -55,6 +55,9 @@
     <Filter Include="04.Etc\02.Dialog\01.MiniView">
       <UniqueIdentifier>{cf2f2ff1-4bb2-4420-aa52-db4d13e139f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Etc\02.Dialog\01.UnitTool">
+      <UniqueIdentifier>{56432e8e-178a-4d76-9a21-3de3612b5754}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StudyMfc.h">
@@ -105,6 +108,9 @@
     <ClInclude Include="CMiniView.h">
       <Filter>04.Etc\02.Dialog\01.MiniView</Filter>
     </ClInclude>
+    <ClInclude Include="CUnitTool.h">
+      <Filter>04.Etc\02.Dialog\01.UnitTool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyMfc.cpp">
@@ -145,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="CMiniView.cpp">
       <Filter>04.Etc\02.Dialog\01.MiniView</Filter>
+    </ClCompile>
+    <ClCompile Include="CUnitTool.cpp">
+      <Filter>04.Etc\02.Dialog\01.UnitTool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 
-
+#include "CUnitTool.h"
 // CMyForm 폼 보기
 
 class CMyForm : public CFormView
@@ -22,11 +22,17 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 #endif
-
+private:
+	CFont		m_Font;
+public:
+	CUnitTool	m_UnitTool;
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
 	DECLARE_MESSAGE_MAP()
+public:
+	virtual void OnInitialUpdate();
+	afx_msg void OnUnitTool();
 };
 
 
