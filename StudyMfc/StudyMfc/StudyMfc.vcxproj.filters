@@ -46,6 +46,15 @@
     <Filter Include="04.Etc\01.Terrain">
       <UniqueIdentifier>{ecf84322-3ff4-4c72-b4ad-a3674d68d861}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Etc\02.Dialog">
+      <UniqueIdentifier>{fa316679-c743-4488-b655-26eff46df20f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Etc\02.Dialog\00.MyForm">
+      <UniqueIdentifier>{9957460d-7b35-44e9-be99-cca16a8ef8a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Etc\02.Dialog\01.MiniView">
+      <UniqueIdentifier>{cf2f2ff1-4bb2-4420-aa52-db4d13e139f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StudyMfc.h">
@@ -90,6 +99,12 @@
     <ClInclude Include="CTerrain.h">
       <Filter>04.Etc\01.Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="CMyForm.h">
+      <Filter>04.Etc\02.Dialog\00.MyForm</Filter>
+    </ClInclude>
+    <ClInclude Include="CMiniView.h">
+      <Filter>04.Etc\02.Dialog\01.MiniView</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyMfc.cpp">
@@ -124,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="CTerrain.cpp">
       <Filter>04.Etc\01.Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="CMyForm.cpp">
+      <Filter>04.Etc\02.Dialog\00.MyForm</Filter>
+    </ClCompile>
+    <ClCompile Include="CMiniView.cpp">
+      <Filter>04.Etc\02.Dialog\01.MiniView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

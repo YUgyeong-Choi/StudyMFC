@@ -14,6 +14,7 @@ public:
 	void		Update();
 	void		Render();
 	void		Release();
+	void		Mini_Render();
 public:
 	void	Tile_Change(const D3DXVECTOR3& vPos, const BYTE& byDrawID);
 	void	Set_MainView(CStudyMfcView* pMainView) { m_pMainView = pMainView; }

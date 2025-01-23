@@ -197,7 +197,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CDevice.h" />
+    <ClInclude Include="CMiniView.h" />
     <ClInclude Include="CMultiTexture.h" />
+    <ClInclude Include="CMyForm.h" />
     <ClInclude Include="CSingleTexture.h" />
     <ClInclude Include="CTerrain.h" />
     <ClInclude Include="CTexture.h" />
@@ -213,7 +215,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CDevice.cpp" />
+    <ClCompile Include="CMiniView.cpp" />
     <ClCompile Include="CMultiTexture.cpp" />
+    <ClCompile Include="CMyForm.cpp" />
     <ClCompile Include="CSingleTexture.cpp" />
     <ClCompile Include="CTerrain.cpp" />
     <ClCompile Include="CTexture.cpp" />

@@ -48,6 +48,7 @@ public:
 
 private:
 	CDevice* m_pDevice;
+public:
 	CTerrain* m_pTerrain;
 public:
 	virtual void OnInitialUpdate();

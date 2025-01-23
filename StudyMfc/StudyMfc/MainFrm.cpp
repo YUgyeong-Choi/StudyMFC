@@ -7,6 +7,9 @@
 #include "StudyMfc.h"
 
 #include "MainFrm.h"
+#include "StudyMfcView.h"
+#include "CMyForm.h"
+#include "CMiniView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -45,6 +48,19 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 
 	return 0;
+}
+
+BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
+{
+	m_MainSplitter.CreateStatic(this, 1, 2);
+	m_MainSplitter.CreateView(0, 1, RUNTIME_CLASS(CStudyMfcView), CSize(WINCX, WINCY), pContext);
+
+	m_SecondSplitter.CreateStatic(&m_MainSplitter, 2, 1, WS_CHILD | WS_VISIBLE, m_MainSplitter.IdFromRowCol(0, 0));
+
+	m_SecondSplitter.CreateView(0, 0, RUNTIME_CLASS(CMiniView), CSize(300, 300), pContext);
+	m_SecondSplitter.CreateView(1, 0, RUNTIME_CLASS(CMyForm), CSize(300, 300), pContext);
+	m_MainSplitter.SetColumnInfo(0, 300, 10);
+	return TRUE;
 }
 
 BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)

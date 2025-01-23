@@ -23,8 +23,10 @@ HRESULT CTerrain::Initialize()
 		return E_FAIL;
 	}
 
-	for (int i = 0; i < TILEX; ++i) {
-		for (int j = 0; j < TILEY; ++j) {
+	for (int i = 0; i < TILEY; ++i)
+	{
+		for (int j = 0; j < TILEX; ++j)
+		{
 			TILE* pTile = new TILE;
 
 			float	fY = (TILECY / 2.f) * i;
@@ -108,6 +110,40 @@ void CTerrain::Release()
 	}
 	m_vecTile.clear();
 	m_vecTile.shrink_to_fit();
+}
+
+void CTerrain::Mini_Render()
+{
+	D3DXMATRIX	matWorld, matScale, matTrans;
+
+	for (auto pTile : m_vecTile)
+	{
+		D3DXMatrixIdentity(&matWorld);
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+		D3DXMatrixTranslation(&matTrans,
+			pTile->vPos.x,
+			pTile->vPos.y,
+			pTile->vPos.z);
+
+		matWorld = matScale * matTrans;
+
+		Set_Ratio(&matWorld, 0.3f, 0.3f);
+
+		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", pTile->byDrawID);
+
+		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
+		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
+
+		D3DXVECTOR3	vTemp{ fCenterX, fCenterY, 0.f };
+
+		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture,
+			nullptr,	
+			&vTemp,		
+			nullptr,	
+			D3DCOLOR_ARGB(255, 255, 255, 255)); 
+	}
 }
 
 void CTerrain::Tile_Change(const D3DXVECTOR3& vPos, const BYTE& byDrawID)

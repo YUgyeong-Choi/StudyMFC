@@ -16,6 +16,7 @@
 #include "CTextureMgr.h"
 #include "MainFrm.h"
 #include "CTerrain.h"
+#include "CMiniView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -94,6 +95,11 @@ void CStudyMfcView::OnLButtonDown(UINT nFlags, CPoint point)
 	CScrollView::OnLButtonDown(nFlags, point);
 	m_pTerrain->Tile_Change(D3DXVECTOR3(float(point.x), float(point.y), 0.f), 0);
 	Invalidate(false);
+
+	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(GetParentFrame());
+	CMiniView* pMiniView = dynamic_cast<CMiniView*>(pMainFrm->m_SecondSplitter.GetPane(0, 0));
+
+	pMiniView->Invalidate(FALSE);
 }
 
 void CStudyMfcView::OnMouseMove(UINT nFlags, CPoint point)
@@ -109,10 +115,10 @@ void CStudyMfcView::OnMouseMove(UINT nFlags, CPoint point)
 			0.f), 0);
 		Invalidate(FALSE);
 
-		//CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(GetParentFrame());
-		//CMiniView* pMiniView = dynamic_cast<CMiniView*>(pMainFrm->m_SecondSplitter.GetPane(0, 0));
+		CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(GetParentFrame());
+		CMiniView* pMiniView = dynamic_cast<CMiniView*>(pMainFrm->m_SecondSplitter.GetPane(0, 0));
 
-		//pMiniView->Invalidate(FALSE);
+		pMiniView->Invalidate(FALSE);
 	}
 }
 
