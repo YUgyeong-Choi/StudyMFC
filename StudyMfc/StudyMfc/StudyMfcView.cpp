@@ -15,6 +15,7 @@
 #include "CDevice.h"
 #include "CTextureMgr.h"
 #include "MainFrm.h"
+#include "CTerrain.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -24,15 +25,16 @@ HWND	g_hWnd;
 
 // CStudyMfcView
 
-IMPLEMENT_DYNCREATE(CStudyMfcView, CView)
+IMPLEMENT_DYNCREATE(CStudyMfcView, CScrollView)
 
-BEGIN_MESSAGE_MAP(CStudyMfcView, CView)
+BEGIN_MESSAGE_MAP(CStudyMfcView, CScrollView)
 	// 표준 인쇄 명령입니다.
-	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
-	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
-	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_COMMAND(ID_FILE_PRINT, &CScrollView::OnFilePrint)
+	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CScrollView::OnFilePrint)
+	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CScrollView::OnFilePrintPreview)
 	ON_WM_DESTROY()
 	ON_WM_LBUTTONDOWN() //좌클릭 활성화
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
 // CStudyMfcView 생성/소멸
@@ -49,7 +51,8 @@ CStudyMfcView::~CStudyMfcView()
 
 void CStudyMfcView::OnInitialUpdate()
 {
-	CView::OnInitialUpdate();
+	CScrollView::OnInitialUpdate();
+	SetScrollSizes(MM_TEXT, CSize(TILECX * TILEX, TILECY * TILEY / 2));
 
 	CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
 
@@ -77,23 +80,40 @@ void CStudyMfcView::OnInitialUpdate()
 		return;
 	}
 
-	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
-		L"../Texture/Stage/Terrain/Tile/Tile%d.png",
-		TEX_MULTI, L"Terrain", L"Tile", 36)))
+	m_pTerrain = new CTerrain;
+	if (FAILED(m_pTerrain->Initialize()))
 	{
-		AfxMessageBox(L"Terrain Texture Insert Failed");
+		AfxMessageBox(L"m_pTerrain Create Failed");
 		return;
 	}
-
-	m_pTerrain = new CTerrain();
-	m_pTerrain->Initialize();
+	m_pTerrain->Set_MainView(this);
 }
 
 void CStudyMfcView::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	CView::OnLButtonDown(nFlags, point);
+	CScrollView::OnLButtonDown(nFlags, point);
 	m_pTerrain->Tile_Change(D3DXVECTOR3(float(point.x), float(point.y), 0.f), 0);
 	Invalidate(false);
+}
+
+void CStudyMfcView::OnMouseMove(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CScrollView::OnMouseMove(nFlags, point);
+
+	if (GetAsyncKeyState(VK_LBUTTON) & 0x8000)
+	{
+		m_pTerrain->Tile_Change(D3DXVECTOR3(float(point.x) + GetScrollPos(0),
+			float(point.y) + GetScrollPos(1),
+			0.f), 0);
+		Invalidate(FALSE);
+
+		//CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(GetParentFrame());
+		//CMiniView* pMiniView = dynamic_cast<CMiniView*>(pMainFrm->m_SecondSplitter.GetPane(0, 0));
+
+		//pMiniView->Invalidate(FALSE);
+	}
 }
 
 // CStudyMfcView 그리기
@@ -113,8 +133,8 @@ void CStudyMfcView::OnDraw(CDC* /*pDC*/)
 
 void CStudyMfcView::OnDestroy()
 {
-	Safe_Delete<CTerrain*>(m_pTerrain);
-	CView::OnDestroy();
+	CScrollView::OnDestroy();
+	Safe_Delete(m_pTerrain);
 	CTextureMgr::Destroy_Instance();
 	m_pDevice->Destroy_Instance();
 }
@@ -125,7 +145,7 @@ BOOL CStudyMfcView::PreCreateWindow(CREATESTRUCT& cs)
 	// TODO: CREATESTRUCT cs를 수정하여 여기에서
 	//  Window 클래스 또는 스타일을 수정합니다.
 
-	return CView::PreCreateWindow(cs);
+	return CScrollView::PreCreateWindow(cs);
 }
 
 
@@ -153,12 +173,12 @@ void CStudyMfcView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 #ifdef _DEBUG
 void CStudyMfcView::AssertValid() const
 {
-	CView::AssertValid();
+	CScrollView::AssertValid();
 }
 
 void CStudyMfcView::Dump(CDumpContext& dc) const
 {
-	CView::Dump(dc);
+	CScrollView::Dump(dc);
 }
 
 

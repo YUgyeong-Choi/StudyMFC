@@ -3,7 +3,7 @@
 #include "CTextureMgr.h"
 #include "CDevice.h"
 
-CTerrain::CTerrain()
+CTerrain::CTerrain():m_pMainView(nullptr)
 {
 	m_vecTile.reserve(TILEX * TILEY);
 }
@@ -13,8 +13,15 @@ CTerrain::~CTerrain()
 	Release();
 }
 
-void CTerrain::Initialize()
+HRESULT CTerrain::Initialize()
 {
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
+		L"../Texture/Stage/Terrain/Tile/Tile%d.png",
+		TEX_MULTI, L"Terrain", L"Tile", 36)))
+	{
+		AfxMessageBox(L"Terrain Texture Insert Failed");
+		return E_FAIL;
+	}
 
 	for (int i = 0; i < TILEX; ++i) {
 		for (int j = 0; j < TILEY; ++j) {
@@ -31,6 +38,8 @@ void CTerrain::Initialize()
 			m_vecTile.push_back(pTile);
 		}
 	}
+
+	return S_OK;
 }
 
 void CTerrain::Update()
@@ -39,35 +48,56 @@ void CTerrain::Update()
 
 void CTerrain::Render()
 {
-	D3DXMATRIX	matWorld, matScale, matRotZ, matTrans;
+	D3DXMATRIX	matWorld, matScale, matTrans;
 
-	D3DXMatrixIdentity(&matWorld);
-	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
-	D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(45.f));
+	TCHAR	szBuf[MIN_STR] = L"";
+	int		iIndex(0);
 
-	for (size_t i = 0; i < m_vecTile.size(); ++i) {
-		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", m_vecTile[i]->byDrawID);
+	for (auto pTile : m_vecTile)
+	{
+		D3DXMatrixIdentity(&matWorld);
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+		D3DXMatrixTranslation(&matTrans,
+			pTile->vPos.x - m_pMainView->GetScrollPos(0),
+			pTile->vPos.y - m_pMainView->GetScrollPos(1),
+			pTile->vPos.z);
+
+		matWorld = matScale * matTrans;
+
+		RECT	rc{};
+
+		GetClientRect(m_pMainView->m_hWnd, &rc);
+
+		float	fX = WINCX / float(rc.right - rc.left);
+		float	fY = WINCY / float(rc.bottom - rc.top);
+
+		Set_Ratio(&matWorld, fX, fY);
+
+		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Terrain", L"Tile", pTile->byDrawID);
+
 		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
 		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
 
 		D3DXVECTOR3	vTemp{ fCenterX, fCenterY, 0.f };
 
+		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, 
+			nullptr,	
+			&vTemp,	
+			nullptr,
+			D3DCOLOR_ARGB(255, 255, 255, 255)); 
 
-		D3DXMatrixTranslation(&matTrans, m_vecTile[i]->vPos.x, m_vecTile[i]->vPos.y, 0.f);
-		matWorld = matScale * matTrans;
-		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
-		CDevice::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &vTemp, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+		swprintf_s(szBuf, L"%d", iIndex);
 
-
-		TCHAR	szBuf[MIN_STR] = L"";
-		int	iNumber = 1000;
-		swprintf_s(szBuf, L"%d,%d", (int)m_vecTile[i]->vPos.x, (int)m_vecTile[i]->vPos.y);
 		CDevice::Get_Instance()->Get_Font()->DrawTextW(CDevice::Get_Instance()->Get_Sprite(),
-			szBuf,		// 출력할 문자열
-			lstrlen(szBuf),  // 문자열 버퍼의 크기
-			nullptr,	// 출력할 렉트 위치
-			DT_CENTER | DT_VCENTER,			// 정렬 기준(옵션)
+			szBuf,		
+			lstrlen(szBuf),
+			nullptr,
+			0,		
 			D3DCOLOR_ARGB(255, 255, 255, 255));
+
+		iIndex++;
 	}
 }
 
@@ -76,6 +106,8 @@ void CTerrain::Release()
 	for (size_t i = 0; i < m_vecTile.size(); ++i) {
 		Safe_Delete<TILE*>(m_vecTile[i]);
 	}
+	m_vecTile.clear();
+	m_vecTile.shrink_to_fit();
 }
 
 void CTerrain::Tile_Change(const D3DXVECTOR3& vPos, const BYTE& byDrawID)
@@ -87,6 +119,19 @@ void CTerrain::Tile_Change(const D3DXVECTOR3& vPos, const BYTE& byDrawID)
 
 	m_vecTile[iIndex]->byDrawID = byDrawID;
 	m_vecTile[iIndex]->byOption = 1;
+}
+
+void CTerrain::Set_Ratio(D3DXMATRIX* pOut, float _fX, float _fY)
+{
+	pOut->_11 *= _fX;
+	pOut->_21 *= _fX;
+	pOut->_31 *= _fX;
+	pOut->_41 *= _fX;
+
+	pOut->_12 *= _fY;
+	pOut->_22 *= _fY;
+	pOut->_32 *= _fY;
+	pOut->_42 *= _fY;
 }
 
 

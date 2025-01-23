@@ -4,9 +4,10 @@
 
 #pragma once
 #include "CDevice.h"
-#include "CTerrain.h"
 
-class CStudyMfcView : public CView
+class CTerrain;
+class CStudyMfcDoc;
+class CStudyMfcView : public CScrollView
 {
 protected: // serialization에서만 만들어집니다.
 	CStudyMfcView() noexcept;
@@ -51,6 +52,7 @@ private:
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // StudyMfcView.cpp의 디버그 버전
